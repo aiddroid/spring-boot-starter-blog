@@ -5,6 +5,8 @@
  */
 package com.example.demo.pojo;
 
+import java.util.Date;
+
 /**
  *
  * @author allen
@@ -75,5 +77,7 @@ public class Article {
         this.updatedAt = updatedAt;
     }
     
-    
+    public Date getCreatedDate() {
+        return new Date(this.createdAt * 1000);
+    }
 }

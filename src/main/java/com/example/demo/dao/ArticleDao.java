@@ -6,6 +6,8 @@
 package com.example.demo.dao;
 
 import com.example.demo.pojo.Article;
+import java.util.HashMap;
+import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -16,4 +18,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ArticleDao {
     
     Article getById(Long id);
+    
+    List<Article> getList(HashMap<String, String> map);
+    
+    List<Article> getAll();
 }

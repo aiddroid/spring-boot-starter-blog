@@ -7,8 +7,11 @@ package com.example.demo.controller;
 
 import com.example.demo.pojo.Article;
 import com.example.demo.service.ArticleService;
+import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -25,5 +28,10 @@ public class ArticleController {
     @RequestMapping("index")
     public Article index() {
         return articleService.find(1L);
+    }
+    
+    @RequestMapping(value = "view/{id}", method = RequestMethod.GET)
+    public Article view(@PathVariable Long id) {
+        return articleService.find(id);
     }
 }

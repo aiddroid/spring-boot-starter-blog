@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.ArticleDao">
+    <resultMap type="com.example.demo.pojo.Article" id="ArticleList">
+        <result property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="slug" column="slug"/>
+        <result property="content" column="content"/>
+        <result property="uid" column="uid"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+    
+    <select id="getById" parameterType="Long" resultType="com.example.demo.pojo.Article">
+        SELECT * FROM article WHERE id = #{id}
+    </select>
+    
+    <select id="getList" parameterType="HashMap" resultMap="ArticleList">
+        SELECT * FROM article LIMIT #{offset}, #{count}
+    </select>
+    
+    <select id="getAll" resultMap="ArticleList">
+        SELECT * FROM article
+    </select>
+</mapper>
