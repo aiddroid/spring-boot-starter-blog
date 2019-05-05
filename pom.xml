@@ -73,6 +73,13 @@
                     <artifactId>mysql-connector-java</artifactId>
                 </dependency>
                 
+                <!--开发工具，实时调试-->
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-devtools</artifactId>
+                    <optional>true</optional>
+               </dependency>
+
 	</dependencies>
 
 	<build>
