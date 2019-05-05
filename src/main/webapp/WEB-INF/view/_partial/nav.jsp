@@ -14,9 +14,9 @@
           <li class="nav-item">
             <a class="nav-link" href="/about/index">About</a>
           </li>
-          <li class="nav-item">
+<!--          <li class="nav-item">
             <a class="nav-link" href="/">Posts</a>
-          </li>
+          </li>-->
           <li class="nav-item">
             <a class="nav-link" href="/site/login">Login</a>
           </li>

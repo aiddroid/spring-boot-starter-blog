@@ -28,56 +28,40 @@
 </head>
 
 <body>
-  
-  <jsp:include flush="true" page="./_partial/nav.jsp" />
+
+  <jsp:include flush="true" page="../_partial/nav.jsp" />
 
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+  <header class="masthead" style="background-image: url('img/post-bg.jpg')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="site-heading">
-            <h1>A demo blog</h1>
-            <span class="subheading">A Blog Theme by Bootstrap and powered by springboot.</span>
+          <div class="post-heading">
+            <h1><c:out value="${article.title}"/></h1>
+            <h2 class="subheading"><c:out value="${fn:substring(article.content, 0, 50)}..."/></h2>
+            <span class="meta">Posted by
+              <a href="#">admin</a>
+              <i>
+                  <fmt:formatDate value="${article.createdDate}" pattern="yyyy-MM-dd HH:mm"/>
+              </i>
+            </span>
           </div>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Main Content -->
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-          
-      <c:forEach var="article" items="${articles}">
-        <div class="post-preview">
-          <a href="/article/view/<c:out value="${article.id}"/>">
-            <h2 class="post-title">
-              <c:out value="${article.title}"/>
-            </h2>
-            <h3 class="post-subtitle">
-              <c:out value="${fn:substring(article.content, 0, 100)}..."/>
-            </h3>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="/">admin</a>
-            <i>
-                <fmt:formatDate value="${article.createdDate}" pattern="yyyy-MM-dd HH:mm"/> 
-            </i>
-          </p>
-        </div>
-        <hr>
-      </c:forEach>
-
-        <!-- Pager -->
-        <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+  <!-- Post Content -->
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <c:out value="${article.content}" escapeXml="false"/>
         </div>
       </div>
     </div>
-  </div>
+  </article>
 
   <hr>
 
@@ -128,3 +112,4 @@
 </body>
 
 </html>
+
