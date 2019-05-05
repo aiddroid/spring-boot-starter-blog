@@ -25,18 +25,16 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
         http.csrf().disable();
         
         http.authorizeRequests()
-            .antMatchers("/", "/static/**").permitAll()
-                .anyRequest().fullyAuthenticated()
+                .antMatchers("/", "/static/**","/site/login") // 不需要登录就可以访问
+                .permitAll()
+                .antMatchers("/admin/**").hasAnyRole("ADMIN") // 需要具有ROLE_ADMIN角色才能访问
+                .anyRequest().authenticated()
                 .and()
                     .formLogin()
-                    .loginPage("/site/login").permitAll()
-                    .successForwardUrl("/")
-                .and()
-                    .logout()
-                    .logoutUrl("/site/logout").permitAll()
-                .and()
-                    .rememberMe()
-                    .tokenValiditySeconds(86400 * 30);
+                    .loginPage("/site/login") // 设置登录页面
+//                    .loginProcessingUrl("/site/form")
+                    .defaultSuccessUrl("/") // 设置默认登录成功后跳转的页面
+                ;
     }
 
     @Override
