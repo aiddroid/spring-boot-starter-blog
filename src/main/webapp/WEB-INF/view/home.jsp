@@ -1,6 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!--jstl核心标签库-->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!--功能函数标签库-->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<!--格式化标签库-->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
 <!DOCTYPE html>
 <html lang="en">

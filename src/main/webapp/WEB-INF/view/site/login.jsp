@@ -66,6 +66,8 @@
               <p class="help-block text-danger"></p>
             </div>
           </div>
+          <!--anti csrf token-->
+          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
           <br>
           <div id="success"></div>
           <div class="form-group">

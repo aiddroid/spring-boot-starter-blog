@@ -73,6 +73,8 @@
               <p class="help-block text-danger"></p>
             </div>
           </div>
+          <!--anti csrf token-->
+          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
           <br>
           <div id="success"></div>
           <div class="form-group">
@@ -105,6 +107,9 @@
                   imageLink: true,
                   imageUpload: '/admin/upload',//上传路径
                   imageUploadParam: 'uploadfile',//上传字段名
+                  imageData: {
+                      "${_csrf.parameterName}": "${_csrf.token}"
+                  },
                   imageResizable: true
               }
        );

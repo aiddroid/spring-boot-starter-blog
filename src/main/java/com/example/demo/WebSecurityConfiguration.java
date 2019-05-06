@@ -22,7 +22,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+        //禁用csrf防护
+//      http.csrf().disable();
         
         http.authorizeRequests()
                 .antMatchers("/", "/static/**", "/about/**", "/article/**", "/site/login") // 不需要登录就可以访问
