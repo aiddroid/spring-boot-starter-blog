@@ -5,6 +5,7 @@
  */
 package com.example.demo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,6 +20,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
+    
+    //自动接入
+    @Autowired
+    private MyUserDetailService myUserDetailService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -46,11 +51,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         //spring实现的用户认证, 用户名密码存储于内存中
-        auth.inMemoryAuthentication()
-                .withUser("admin")
-                .password("123456").roles("ADMIN")
-                .and()
-                .passwordEncoder(new PlainPasswordEncoder());
+//        auth.inMemoryAuthentication()
+//                .withUser("admin")
+//                .password("123456").roles("ADMIN")
+//                .and()
+//                .passwordEncoder(new PlainPasswordEncoder());
+
+        //使用数据库记录进行用户认证
+        auth.userDetailsService(myUserDetailService).passwordEncoder(new PlainPasswordEncoder());
     }
     
 }
