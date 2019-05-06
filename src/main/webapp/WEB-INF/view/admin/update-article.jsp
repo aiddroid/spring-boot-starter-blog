@@ -96,7 +96,17 @@
   
   <!--redactor editor-->
   <script src="js/redactor3.js"></script>
-  <script>$R('#content', {minHeight: '200px'});</script>
+  <script>
+      $R('#content', 
+              {
+                  minHeight: '200px',
+                  imageLink: true,
+                  imageUpload: '/admin/upload',
+                  imageUploadParam: 'uploadfile',
+                  imageResizable: true
+              }
+       );
+  </script>
 </body>
 
 </html>

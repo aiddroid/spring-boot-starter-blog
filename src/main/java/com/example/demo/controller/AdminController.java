@@ -6,18 +6,28 @@
 package com.example.demo.controller;
 
 import com.example.demo.pojo.Article;
+import com.example.demo.pojo.UploadFile;
 import com.example.demo.service.ArticleService;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -93,5 +103,37 @@ public class AdminController {
         mm.addAttribute("message", "what's up!");
         
         return "/article/view";
+    }
+    
+    @Value("${file.uploadAccessPath}")
+    private String uploadAccessPath;
+    @Value("${file.uploadFolder}")
+    private String uploadFolder;
+    
+    @RequestMapping("upload")
+    @ResponseBody
+    public HashMap upload(@RequestParam("uploadfile[]") MultipartFile mfile) {
+        HashMap uploadMap = new HashMap();
+        
+        if (mfile.isEmpty()) {
+            return uploadMap;
+        }
+        
+        try {
+            String uuid = UUID.randomUUID().toString();
+            String newName = uuid + ".jpg";
+            File destFile = new File(uploadFolder + newName);
+            System.out.println(destFile.getAbsolutePath());
+            mfile.transferTo(destFile);
+            
+            UploadFile uploadFile = new UploadFile(mfile.getOriginalFilename(), uploadAccessPath.replace("*", "") + newName);
+            uploadMap.put(uuid, uploadFile);
+            
+            return uploadMap;
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+        
+        return uploadMap;
     }
 }
