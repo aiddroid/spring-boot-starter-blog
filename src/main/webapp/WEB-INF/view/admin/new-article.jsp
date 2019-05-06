@@ -88,13 +88,6 @@
 
   <!-- Footer -->
   <jsp:include flush="true" page="../_partial/footer.jsp" />
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Custom scripts for this template -->
-  <script src="js/clean-blog.min.js"></script>
   
   <!--redactor editor-->
   <script src="js/redactor3.js"></script>

@@ -25,7 +25,11 @@
             <a class="nav-link" href="/admin/new-article">Add New</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/site/logout" title="${sessionScope.username}">Logout</a>
+            <form class="logout-form" action="/site/logout" method="post">
+                <!--anti csrf token-->
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            </form>
+            <a class="nav-link logout-link" href="#" title="${sessionScope.username}">Logout</a>
           </li>
       </c:when>
       <c:otherwise>
