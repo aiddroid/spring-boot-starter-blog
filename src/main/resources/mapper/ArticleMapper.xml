@@ -36,4 +36,8 @@
     <delete id="delete" parameterType="Long">
         DELETE FROM article WHERE id = #{id}
     </delete>
+    
+    <select id="totalCount" resultType="Integer">
+        SELECT COUNT(id) FROM article
+    </select>
 </mapper>

@@ -60,35 +60,47 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-          
-      <c:forEach var="article" items="${articles}">
-        <div class="post-preview">
-          <a href="/article/view/<c:out value="${article.id}"/>">
-            <h2 class="post-title">
-              <c:out value="${article.title}"/>
-            </h2>
-            <h3 class="post-subtitle">
-              <c:out value="${fn:substring(article.content, 0, 100)}..."/>
-            </h3>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">admin</a>
-            <i>
-                <fmt:formatDate value="${article.createdAt}" pattern="yyyy-MM-dd HH:mm"/>
-            </i>
-            
-            <c:if test="${sessionScope.username != null}">
-                <a href="/admin/delete-article?id=${article.id}" class="delete-link text-danger">Delete</a>
-                <a href="/admin/update-article?id=${article.id}" class="edit-link text-danger">Edit</a>
-            </c:if>
-          </p>
-        </div>
+        <c:choose>
+          <c:when test="${articles.size() > 0}">
+            <c:forEach var="article" items="${articles}">
+              <div class="post-preview">
+                <a href="/article/view/<c:out value="${article.id}"/>">
+                  <h2 class="post-title">
+                    <c:out value="${article.title}"/>
+                  </h2>
+                  <h3 class="post-subtitle">
+                    <c:out value="${fn:substring(article.content, 0, 100)}..."/>
+                  </h3>
+                </a>
+                <p class="post-meta">Posted by
+                  <a href="#">admin</a>
+                  <i>
+                      <fmt:formatDate value="${article.createdAt}" pattern="yyyy-MM-dd HH:mm"/>
+                  </i>
+
+                  <c:if test="${sessionScope.username != null}">
+                      <a href="/admin/delete-article?id=${article.id}" class="delete-link text-danger">Delete</a>
+                      <a href="/admin/update-article?id=${article.id}" class="edit-link text-danger">Edit</a>
+                  </c:if>
+                </p>
+              </div>
+            </c:forEach>
+          </c:when>
+          <c:otherwise>
+              <p>No contents!</p>
+          </c:otherwise>
+        </c:choose>
         <hr>
-      </c:forEach>
 
         <!-- Pager -->
         <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+          <c:if test="${page > 1}">
+          <a class="btn btn-primary float-left" href="/?page=${page-1}">&larr; Newer Posts</a>
+          </c:if>
+          
+          <c:if test="${maxPage > page}">
+          <a class="btn btn-primary float-right" href="/?page=${page+1}">Older Posts &rarr;</a>
+          </c:if>
         </div>
       </div>
     </div>
@@ -97,41 +109,7 @@
   <hr>
 
   <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <ul class="list-inline text-center">
-            <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-          </ul>
-          <p class="copyright text-muted">Copyright &copy; Your Website 2019</p>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <jsp:include flush="true" page="./_partial/footer.jsp" />
 
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>

@@ -53,14 +53,18 @@ public class ArticleService {
         return articleDao.delete(id);
     }
     
-    public List<Article> get(int offset, int count) {
+    public List<Article> get(int page, int count) {
         HashMap map = new HashMap();
-        map.put("offset", offset);
+        map.put("offset", (page - 1) * count);
         map.put("count", count);
         return articleDao.getList(map);
     }
     
     public List<Article> all() {
         return articleDao.getAll();
+    }
+    
+    public int totalCount() {
+        return articleDao.totalCount();
     }
 }

@@ -34,11 +34,15 @@ public class HomeController {
             @RequestParam(value = "count", required = false, defaultValue = "10") int count, 
             HttpServletRequest request, 
             Authentication authentication) {
-        List<Article> articles = articleService.get(page - 1, count);
+        List<Article> articles = articleService.get(page, count);
         
         mm.addAttribute("articles", articles);
         
-        System.out.println(authentication);
+        int totalCount = articleService.totalCount();
+        int maxPage = (int)Math.ceil((double)totalCount / count);
+        mm.addAttribute("page", page);
+        mm.addAttribute("maxPage", maxPage);
+        
         if (authentication != null && authentication.isAuthenticated()) {
             request.getSession().setAttribute("username", "admin");
             System.out.println(request.getSession().getAttribute("username"));

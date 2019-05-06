@@ -28,4 +28,6 @@ public interface ArticleDao {
     List<Article> getList(HashMap<String, String> map);
     
     List<Article> getAll();
+    
+    int totalCount();
 }

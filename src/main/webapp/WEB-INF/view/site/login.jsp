@@ -22,7 +22,7 @@
 
   <!-- Custom styles for this template -->
   <link href="css/clean-blog.min.css" rel="stylesheet">
-  <style>.masthead{height:100px;}</style>
+  <style>.masthead{height:65px;}</style>
 </head>
 
 <body>
