@@ -16,6 +16,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,13 +45,13 @@ public class AdminController {
     private ArticleService articleService;
     
     /**
-     * index页面
+     * 认证信息
      * @return 
      */
     @RequestMapping("index")
     @ResponseBody
-    public Article index() {
-        return articleService.find(1L);
+    public Authentication index(Authentication authentication) {
+        return authentication;
     }
     
     /**
