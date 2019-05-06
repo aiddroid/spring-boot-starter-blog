@@ -22,7 +22,7 @@
 
   <!-- Custom styles for this template -->
   <link href="css/clean-blog.min.css" rel="stylesheet">
-  <style>.masthead{height:65px;}</style>
+  <!--<style>.masthead{height:65px;}</style>-->
 </head>
 
 <body>
@@ -35,9 +35,9 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="page-heading">
-            <h1>Contact Me</h1>
-            <span class="subheading">Have questions? I have answers.</span>
+            <div class="page-heading" style="padding: 60px;">
+            <h1>Login</h1>
+            <span class="subheading">login to manage articles.</span>
           </div>
         </div>
       </div>
