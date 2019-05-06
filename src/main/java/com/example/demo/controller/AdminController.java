@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -85,7 +86,20 @@ public class AdminController {
     }
     
     /**
-     * 更新博文接口（更新博文表单也在这里）
+     * 更新博文界面,GET请求
+     * @param mm
+     * @param id
+     * @return 
+     */
+    @GetMapping("update-article")
+    public String updateArticle(ModelMap mm, @RequestParam(value = "id") Long id) {
+        Article article = articleService.find(id);
+        mm.addAttribute("article", article);
+        return "/admin/update-article";
+    }
+    
+    /**
+     * 更新博文接口,POST请求
      * @param mm
      * @param id 博文id
      * @param title 标题
@@ -94,7 +108,7 @@ public class AdminController {
      * @param request
      * @return 
      */
-    @RequestMapping("update-article")
+    @PostMapping("update-article")
     public String updateArticle(ModelMap mm, @RequestParam(value = "id") Long id, 
             @RequestParam(value = "title", required = false) String title,
             @RequestParam(value = "slug", required = false) String slug, 
