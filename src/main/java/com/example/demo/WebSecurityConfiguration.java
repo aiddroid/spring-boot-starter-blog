@@ -22,8 +22,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //禁用csrf防护
-//      http.csrf().disable();
+        
+        http.csrf().disable();
         
         http.authorizeRequests()
                 .antMatchers("/", "/static/**", "/about/**", "/article/**", "/site/login") // 不需要登录就可以访问
@@ -35,9 +35,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
                     .loginPage("/site/login") // 设置登录页面路径(只是显示前端页面,具体的登录认证逻辑由spring实现)
 //                    .loginProcessingUrl("/site/form")
                     .defaultSuccessUrl("/") // 设置默认登录成功后跳转的页面
+                    .permitAll()
                 .and()
                     .logout()
                     .logoutUrl("/site/logout")
+                    .permitAll()
                 ;
     }
 
