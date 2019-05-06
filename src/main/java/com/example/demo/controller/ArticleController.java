@@ -36,7 +36,7 @@ public class ArticleController {
         Article article = articleService.find(id);
         mm.addAttribute("article", article);
         mm.addAttribute("message", "what's up!");
-        
+          
         return "/article/view";
     }
 }

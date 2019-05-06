@@ -69,11 +69,11 @@
                     <c:out value="${article.title}"/>
                   </h2>
                   <h3 class="post-subtitle">
-                    <c:out value="${fn:substring(article.content, 0, 100)}..."/>
+                    <c:out value="${fn:substring(article.slug, 0, 100)}..."/>
                   </h3>
                 </a>
                 <p class="post-meta">Posted by
-                  <a href="#">admin</a>
+                  <a href="/?author=admin">admin</a>
                   <i>
                       <fmt:formatDate value="${article.createdAt}" pattern="yyyy-MM-dd HH:mm"/>
                   </i>

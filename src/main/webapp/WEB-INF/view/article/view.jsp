@@ -39,9 +39,9 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="post-heading">
             <h1><c:out value="${article.title}"/></h1>
-            <h2 class="subheading"><c:out value="${fn:substring(article.content, 0, 50)}..."/></h2>
+            <h2 class="subheading"><c:out value="${fn:substring(article.slug, 0, 100)}..."/></h2>
             <span class="meta">Posted by
-              <a href="#">admin</a>
+              <a href="/?author=admin">admin</a>
               <i>
                   <fmt:formatDate value="${article.createdAt}" pattern="yyyy-MM-dd HH:mm"/>
               </i>

@@ -13,7 +13,7 @@
         <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
     </resultMap>
     
-    <select id="getById" parameterType="Long" resultType="com.example.demo.pojo.Article">
+    <select id="getById" parameterType="Long" resultMap="ArticleList">
         SELECT * FROM article WHERE id = #{id}
     </select>
     
