@@ -18,8 +18,8 @@ public class Article {
     private String slug;
     private String content;
     private int uid;
-    private int createdAt;
-    private int updatedAt;
+    private Date createdAt;
+    private Date updatedAt;
 
     public Long getId() {
         return id;
@@ -61,23 +61,19 @@ public class Article {
         this.uid = uid;
     }
 
-    public int getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(int createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public int getUpdatedAt() {
+    public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(int updatedAt) {
+    public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
-    }
-    
-    public Date getCreatedDate() {
-        return new Date(this.createdAt * 1000);
     }
 }

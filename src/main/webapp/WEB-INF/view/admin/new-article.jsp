@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +10,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-
   <title>Demo Blog - Start Bootstrap Theme</title>
 
   <!-- Bootstrap core CSS -->
@@ -24,72 +22,62 @@
 
   <!-- Custom styles for this template -->
   <link href="css/clean-blog.min.css" rel="stylesheet">
-  <link href="css/site.css" rel="stylesheet">
+  
+  <!--redactor editor-->
+  <link href="css/redactor.min.css" rel="stylesheet">
 </head>
 
 <body>
-  
-  <jsp:include flush="true" page="./_partial/nav.jsp" />
+
+  <jsp:include flush="true" page="../_partial/nav.jsp" />
 
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+  <header class="masthead" style="background-image: url('img/about-bg.jpg')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="site-heading">
-              
-            <c:if test="${alert != null}">
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                ${alert}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            </c:if>
-              
-            <h1>A demo blog</h1>
-            <span class="subheading">A Blog Theme by Bootstrap and powered by springboot.</span>
+          <div class="page-heading">
+            <h1>Create Article</h1>
+            <span class="subheading">Create a new post.</span>
           </div>
         </div>
       </div>
     </div>
   </header>
-  
+
   <!-- Main Content -->
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-          
-      <c:forEach var="article" items="${articles}">
-        <div class="post-preview">
-          <a href="/article/view/<c:out value="${article.id}"/>">
-            <h2 class="post-title">
-              <c:out value="${article.title}"/>
-            </h2>
-            <h3 class="post-subtitle">
-              <c:out value="${fn:substring(article.content, 0, 100)}..."/>
-            </h3>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">admin</a>
-            <i>
-                <fmt:formatDate value="${article.createdAt}" pattern="yyyy-MM-dd HH:mm"/>
-            </i>
-            
-            <c:if test="${sessionScope.username != null}">
-                <a href="/admin/delete-article?id=${article.id}" class="delete-link text-danger">Delete</a>
-                <a href="/admin/update-article?id=${article.id}" class="edit-link text-danger">Edit</a>
-            </c:if>
-          </p>
-        </div>
-        <hr>
-      </c:forEach>
-
-        <!-- Pager -->
-        <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-        </div>
+          <form name="sentMessage" id="contactForm" action="/admin/create-article" method="post" novalidate>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Title</label>
+              <input type="text" class="form-control" placeholder="Title" id="title" name="title" required data-validation-required-message="Please enter title.">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Slug</label>
+              <input type="text" class="form-control" placeholder="Slug" id="slug" name="slug" required data-validation-required-message="Please enter slug.">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Content</label>
+              <textarea class="form-control" placeholder="Content" id="content" name="content" required data-validation-required-message="Please enter content." rows="20"></textarea>
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <br>
+          <div id="success"></div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary" id="sendMessageButton">Post</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -139,7 +127,10 @@
 
   <!-- Custom scripts for this template -->
   <script src="js/clean-blog.min.js"></script>
-
+  
+  <!--redactor editor-->
+  <script src="js/redactor3.js"></script>
+  <script>$R('#content', {minHeight: '200px'});</script>
 </body>
 
 </html>

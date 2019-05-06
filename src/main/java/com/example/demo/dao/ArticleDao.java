@@ -17,6 +17,12 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ArticleDao {
     
+    int add(HashMap<String, String> map);
+    
+    int update(HashMap<String, String> map);
+    
+    int delete(Long id);
+    
     Article getById(Long id);
     
     List<Article> getList(HashMap<String, String> map);

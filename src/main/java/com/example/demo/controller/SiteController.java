@@ -5,6 +5,7 @@
  */
 package com.example.demo.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +20,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class SiteController {
     
     @RequestMapping(value = "login", method = {RequestMethod.GET, RequestMethod.POST})
-    public String login(ModelMap mm) {
+    public String login(ModelMap mm, HttpServletRequest request) {
         String message = "hello, world!";
         mm.addAttribute("message", message);
-        
+         
         return "/site/login";
     }
 }

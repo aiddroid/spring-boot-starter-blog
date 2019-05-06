@@ -8,9 +8,9 @@
         <result property="title" column="title"/>
         <result property="slug" column="slug"/>
         <result property="content" column="content"/>
-        <result property="uid" column="uid"/>
-        <result property="createdAt" column="created_at"/>
-        <result property="updatedAt" column="updated_at"/>
+        <result property="uid" column="uid" jdbcType="INTEGER"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
     </resultMap>
     
     <select id="getById" parameterType="Long" resultType="com.example.demo.pojo.Article">
@@ -18,10 +18,22 @@
     </select>
     
     <select id="getList" parameterType="HashMap" resultMap="ArticleList">
-        SELECT * FROM article LIMIT #{offset}, #{count}
+        SELECT * FROM article ORDER BY id DESC LIMIT #{offset}, #{count}
     </select>
     
     <select id="getAll" resultMap="ArticleList">
-        SELECT * FROM article
+        SELECT * FROM article ORDER BY id DESC
     </select>
+    
+    <insert id="add" parameterType="HashMap">
+        INSERT INTO article VALUES(NULL, #{title}, #{slug}, #{content}, #{uid}, #{createdAt}, #{updatedAt})
+    </insert>
+    
+    <update id="update" parameterType="HashMap">
+        UPDATE article SET title = #{title}, slug = #{slug}, content = #{content}, updated_at = #{updatedAt} WHERE id = #{id}
+    </update>
+    
+    <delete id="delete" parameterType="Long">
+        DELETE FROM article WHERE id = #{id}
+    </delete>
 </mapper>

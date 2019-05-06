@@ -8,7 +8,9 @@ package com.example.demo.controller;
 import com.example.demo.pojo.Article;
 import com.example.demo.service.ArticleService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,10 +29,20 @@ public class HomeController {
     private ArticleService articleService;
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(ModelMap mm, @RequestParam(value = "page", required = false, defaultValue = "1") int page, @RequestParam(value = "count", required = false, defaultValue = "10") int count) {
+    public String index(ModelMap mm, 
+            @RequestParam(value = "page", required = false, defaultValue = "1") int page, 
+            @RequestParam(value = "count", required = false, defaultValue = "10") int count, 
+            HttpServletRequest request, 
+            Authentication authentication) {
         List<Article> articles = articleService.get(page - 1, count);
         
         mm.addAttribute("articles", articles);
+        
+        System.out.println(authentication);
+        if (authentication != null && authentication.isAuthenticated()) {
+            request.getSession().setAttribute("username", "admin");
+            System.out.println(request.getSession().getAttribute("username"));
+        }
         return "/home";
     } 
 }

@@ -24,7 +24,7 @@
 
   <!-- Custom styles for this template -->
   <link href="css/clean-blog.min.css" rel="stylesheet">
-
+  <link href="css/site.css" rel="stylesheet">
 </head>
 
 <body>
@@ -43,8 +43,13 @@
             <span class="meta">Posted by
               <a href="#">admin</a>
               <i>
-                  <fmt:formatDate value="${article.createdDate}" pattern="yyyy-MM-dd HH:mm"/>
+                  <fmt:formatDate value="${article.createdAt}" pattern="yyyy-MM-dd HH:mm"/>
               </i>
+              
+            <c:if test="${sessionScope.username != null}">
+                <a href="/admin/delete-article?id=${article.id}" class="delete-link text-danger">Delete</a>
+                <a href="/admin/update-article?id=${article.id}" class="edit-link text-danger">Edit</a>
+            </c:if>
             </span>
           </div>
         </div>

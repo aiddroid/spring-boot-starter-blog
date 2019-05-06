@@ -1,0 +1,3 @@
+.delete-link, .edit-link {float:right;position: absolute;}
+.delete-link {right: 50px;}
+.edit-link {right: 0;}

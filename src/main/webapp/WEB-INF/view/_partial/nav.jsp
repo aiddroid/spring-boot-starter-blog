@@ -1,4 +1,6 @@
-  <!-- Navigation -->
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand" href="/">Demo Blog</a>
@@ -16,10 +18,22 @@
           </li>
 <!--          <li class="nav-item">
             <a class="nav-link" href="/">Posts</a>
-          </li>-->
+          </li>-->          
+    <c:choose>
+      <c:when test="${sessionScope.username != null}">
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/new-article">Add New</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/site/logout" title="${sessionScope.username}">Logout</a>
+          </li>
+      </c:when>
+      <c:otherwise>
           <li class="nav-item">
             <a class="nav-link" href="/site/login">Login</a>
           </li>
+      </c:otherwise>
+    </c:choose>
         </ul>
       </div>
     </div>
