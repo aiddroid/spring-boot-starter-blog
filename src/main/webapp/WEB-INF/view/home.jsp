@@ -49,7 +49,7 @@
             </c:if>
               
             <h1>A demo blog</h1>
-            <span class="subheading">A Blog Theme by Bootstrap and powered by springboot.</span>
+            <span class="subheading">A Blog Theme by Bootstrap and powered by Springboot 2.x</span>
           </div>
         </div>
       </div>
