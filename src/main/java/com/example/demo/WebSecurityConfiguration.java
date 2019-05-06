@@ -13,7 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- *
+ * Web安全配置
  * @author allen
  */
 @Configuration
@@ -31,7 +31,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .anyRequest().authenticated()
                 .and()
                     .formLogin()
-                    .loginPage("/site/login") // 设置登录页面
+                    .loginPage("/site/login") // 设置登录页面路径(只是显示前端页面,具体的登录认证逻辑由spring实现)
 //                    .loginProcessingUrl("/site/form")
                     .defaultSuccessUrl("/") // 设置默认登录成功后跳转的页面
                 .and()
@@ -42,6 +42,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        //spring实现的用户认证, 用户名密码存储于内存中
         auth.inMemoryAuthentication()
                 .withUser("admin")
                 .password("123456").roles("ADMIN")
@@ -51,6 +52,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
     
 }
 
+/**
+ * 密码编码器
+ * @author allen
+ */
 class PlainPasswordEncoder implements PasswordEncoder {
 
     @Override

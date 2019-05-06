@@ -27,16 +27,22 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 /**
- *
+ * Web配置
  * @author allen
  */
 @Configuration
+//启用mvc
 @EnableWebMvc
 public class WebConfiguration implements WebMvcConfigurer{
     
+    /**
+     * 获取视图资源解析器
+     * @return 
+     */
     @Bean
     public ViewResolver getViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        //指定视图资源路径
         resolver.setPrefix("/WEB-INF/view");
         resolver.setSuffix(".jsp");
         resolver.setViewClass(JstlView.class);
@@ -44,20 +50,25 @@ public class WebConfiguration implements WebMvcConfigurer{
         return resolver;
     }
     
-    @Value("${file.uploadAccessPath}")
-    private String uploadAccessPath;
-    @Value("${file.uploadFolder}")
-    private String uploadFolder;
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler(uploadAccessPath).addResourceLocations("file://" + uploadFolder);
-    }
-
+    //启用默认的Servlet处理
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     } 
+    
+    //参见application.properties设置
+    //上传文件访问url path
+    @Value("${file.uploadAccessPath}")
+    private String uploadAccessPath;
+    //上传目录
+    @Value("${file.uploadFolder}")
+    private String uploadFolder;
+
+    //添加上传文件的静态资源解析(java与php不同,无法直接上传到webroot目录下)
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler(uploadAccessPath).addResourceLocations("file://" + uploadFolder);
+    }
     
     @Bean
     public RemoteIpFilter remoteIpFilter() {
@@ -66,7 +77,7 @@ public class WebConfiguration implements WebMvcConfigurer{
     
     @Bean
     public FilterRegistrationBean testFilterRegistrationBean() {
-        //注册过滤器信息
+        //注册自定义拦截器
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         registrationBean.setFilter(new MyFilter());
         registrationBean.addUrlPatterns("/*");
@@ -76,7 +87,9 @@ public class WebConfiguration implements WebMvcConfigurer{
         return registrationBean;
     }
     
-    
+    /**
+     * 自定义拦截器
+     */
     public class MyFilter implements Filter {
 
         @Override
@@ -87,8 +100,9 @@ public class WebConfiguration implements WebMvcConfigurer{
         @Override
         public void doFilter(ServletRequest sr, ServletResponse sr1, FilterChain fc) throws IOException, ServletException {
             HttpServletRequest request = (HttpServletRequest) sr;
-            //做一些操作
-            System.out.println("this is MyFilter, url :" + request.getRequestURI());
+            //具体的拦截操作,这里只是输出当前的url
+            System.out.println("this is MyFilter, current URL :" + request.getRequestURI());
+            
             fc.doFilter(sr, sr1);
         }
 

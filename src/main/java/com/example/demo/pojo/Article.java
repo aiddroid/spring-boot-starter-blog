@@ -13,12 +13,25 @@ import java.util.Date;
  */
 public class Article {
     
+    //id, 自动生成
     private Long id;
+    
+    //博文标题
     private String title;
+    
+    //博文slug短标题
     private String slug;
+    
+    //博文正文
     private String content;
+    
+    //博文作者uid
     private int uid;
+    
+    //创建时间
     private Date createdAt;
+    
+    //更新时间
     private Date updatedAt;
 
     public Long getId() {

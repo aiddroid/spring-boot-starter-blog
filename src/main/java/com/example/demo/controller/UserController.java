@@ -13,17 +13,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
+ * 用户控制器
  * @author allen
  */
 @RestController
 @RequestMapping("/user")
 public class UserController {
     
-        
+    /**
+     * 自动接入
+     */
     @Autowired
     private UserRepository userRepository;
     
+    /**
+     * 管理员信息接口
+     * @return 
+     */
     @RequestMapping("admin")
     public User info() {
         User user = new User("admin", "123456", "allen", "allen@gmail.com", "2019-03-03 12:00:00");
@@ -32,6 +38,10 @@ public class UserController {
         return user;
     }
     
+    /**
+     * get 接口
+     * @return 
+     */
     @RequestMapping("get")
     public User get() {
         User user = userRepository.findByUsername("admin");
@@ -39,6 +49,10 @@ public class UserController {
         return user;
     }
     
+    /**
+     * 保存接口
+     * @return 
+     */
     @RequestMapping("save")
     public Long save() {
         User user = new User("admin", "123456", "allen", "allen@gmail.com", "2019-03-03 12:00:00");

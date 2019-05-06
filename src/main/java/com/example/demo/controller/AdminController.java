@@ -10,49 +10,66 @@ import com.example.demo.pojo.UploadFile;
 import com.example.demo.service.ArticleService;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.ResourceUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
- *
+ * 管理员控制器
  * @author allen
  */
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
     
+    /**
+     * 自动接入
+     */
     @Autowired
     private ArticleService articleService;
     
+    /**
+     * index页面
+     * @return 
+     */
     @RequestMapping("index")
     @ResponseBody
     public Article index() {
         return articleService.find(1L);
     }
     
+    /**
+     * 编写博文表单界面
+     * @return 
+     */
+    @GetMapping
     @RequestMapping("new-article")
     public String newArticle() {
         return "/admin/new-article";
     }
     
+    /**
+     * 创建博文接口
+     * @param request
+     * @param title 标题
+     * @param slug slug
+     * @param content 正文
+     * @return 
+     */
     @RequestMapping(value = "create-article", method = RequestMethod.POST)
     public ModelAndView createArticle(
             HttpServletRequest request,
@@ -67,6 +84,16 @@ public class AdminController {
         return new ModelAndView("redirect:/");
     }
     
+    /**
+     * 更新博文接口（更新博文表单也在这里）
+     * @param mm
+     * @param id 博文id
+     * @param title 标题
+     * @param slug slug
+     * @param content 正文
+     * @param request
+     * @return 
+     */
     @RequestMapping("update-article")
     public String updateArticle(ModelMap mm, @RequestParam(value = "id") Long id, 
             @RequestParam(value = "title", required = false) String title,
@@ -75,6 +102,7 @@ public class AdminController {
             HttpServletRequest request) {
         
         Article article = articleService.find(id);
+        //如果是GET请求，则显示更新表单；否则直接更新博文
         if (request.getMethod().equals("GET")) {
             mm.addAttribute("article", article);
             return "/admin/update-article";
@@ -85,9 +113,17 @@ public class AdminController {
         }
     }
     
+    /**
+     * 删除博文接口
+     * @param id 博文id
+     * @param redirAttrs
+     * @return 
+     */
     @RequestMapping("delete-article")
     public String deleteArticle(@RequestParam(value = "id") Long id, 
             RedirectAttributes redirAttrs) {
+        
+        //删除成功后，添加flash消息
         if (articleService.delete(id) > 0) {
             redirAttrs.addFlashAttribute("alert", "Article deleted!");
         } else {
@@ -96,6 +132,12 @@ public class AdminController {
         return "redirect:/";
     }
     
+    /**
+     * 博文详情页面
+     * @param mm
+     * @param id 博文id
+     * @return 
+     */
     @RequestMapping(value = "view/{id}", method = RequestMethod.GET)
     public String view(ModelMap mm, @PathVariable Long id) {
         Article article = articleService.find(id);
@@ -105,11 +147,19 @@ public class AdminController {
         return "/article/view";
     }
     
+    //参见application.properties设置
+    //上传文件访问url path
     @Value("${file.uploadAccessPath}")
     private String uploadAccessPath;
+    //上传目录
     @Value("${file.uploadFolder}")
     private String uploadFolder;
     
+    /**
+     * 文件上传接口
+     * @param mfile
+     * @return 
+     */
     @RequestMapping("upload")
     @ResponseBody
     public HashMap upload(@RequestParam("uploadfile[]") MultipartFile mfile) {
@@ -120,12 +170,15 @@ public class AdminController {
         }
         
         try {
+            //为上传文件生成新的文件名
             String uuid = UUID.randomUUID().toString();
             String newName = uuid + ".jpg";
             File destFile = new File(uploadFolder + newName);
-            System.out.println(destFile.getAbsolutePath());
+            
+            //移动上传临时文件到上传目录
             mfile.transferTo(destFile);
             
+            //返回上传结果，json格式
             UploadFile uploadFile = new UploadFile(mfile.getOriginalFilename(), uploadAccessPath.replace("*", "") + newName);
             uploadMap.put(uuid, uploadFile);
             

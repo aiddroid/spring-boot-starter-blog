@@ -14,19 +14,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- *
+ * 博文服务
  * @author allen
  */
 @Service
 public class ArticleService {
     
+    /**
+     * 自动接入
+     */
     @Autowired
     private ArticleDao articleDao;
     
+    /**
+     * 根据id查找博文
+     * @param id
+     * @return 
+     */
     public Article find(Long id) {
         return articleDao.getById(id);
     }
     
+    /**
+     * 创建博文
+     * @param title 标题
+     * @param slug slug
+     * @param content 正文
+     * @param uid 作者id
+     * @param createdAt 创建时间
+     * @param updatedAt 更新时间
+     * @return 
+     */
     public int create(String title, String slug, String content, int uid, Date createdAt, Date updatedAt) {        
         HashMap map = new HashMap();
         map.put("title", title);
@@ -38,6 +56,14 @@ public class ArticleService {
         return articleDao.add(map);
     }
     
+    /**
+     * 修改博文
+     * @param id 博文id
+     * @param title 标题
+     * @param slug slug
+     * @param content 正文
+     * @return 
+     */
     public int modify(Long id, String title, String slug, String content) {
         HashMap map = new HashMap();
         map.put("id", id);
@@ -49,10 +75,21 @@ public class ArticleService {
         return articleDao.update(map);
     }
     
+    /**
+     * 删除博文
+     * @param id
+     * @return 
+     */
     public int delete(Long id) {
         return articleDao.delete(id);
     }
     
+    /**
+     * 获取分页博文
+     * @param page 页数
+     * @param count 每页数量
+     * @return 
+     */
     public List<Article> get(int page, int count) {
         HashMap map = new HashMap();
         map.put("offset", (page - 1) * count);
@@ -60,11 +97,19 @@ public class ArticleService {
         return articleDao.getList(map);
     }
     
+    /**
+     * 获取全部博文
+     * @return 
+     */
     public List<Article> all() {
         return articleDao.getAll();
     }
     
-    public int totalCount() {
-        return articleDao.totalCount();
+    /**
+     * 获取博文数量
+     * @return 
+     */
+    public int getTotalCount() {
+        return articleDao.getTotalCount();
     }
 }

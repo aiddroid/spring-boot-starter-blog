@@ -97,12 +97,13 @@
   <!--redactor editor-->
   <script src="js/redactor3.js"></script>
   <script>
+      //配置富文本编辑器
       $R('#content', 
               {
                   minHeight: '200px',
                   imageLink: true,
-                  imageUpload: '/admin/upload',
-                  imageUploadParam: 'uploadfile',
+                  imageUpload: '/admin/upload',//上传路径
+                  imageUploadParam: 'uploadfile',//上传字段名
                   imageResizable: true
               }
        );

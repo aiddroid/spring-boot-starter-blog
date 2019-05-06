@@ -45,7 +45,8 @@
               <i>
                   <fmt:formatDate value="${article.createdAt}" pattern="yyyy-MM-dd HH:mm"/>
               </i>
-              
+            
+            <!--判断是否需要显示管理选项-->
             <c:if test="${sessionScope.username != null}">
                 <a href="/admin/delete-article?id=${article.id}" class="delete-link text-danger">Delete</a>
                 <a href="/admin/update-article?id=${article.id}" class="edit-link text-danger">Edit</a>
@@ -62,6 +63,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
+            <!--显示博文正文,不进行转义-->
             <c:out value="${article.content}" escapeXml="false"/>
         </div>
       </div>

@@ -16,21 +16,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
+ * 文章控制器
  * @author allen
  */
 @Controller
 @RequestMapping("/article")
 public class ArticleController {
     
+    /**
+     * 自动接入
+     */
     @Autowired
     private ArticleService articleService;
     
-    @RequestMapping("index")
-    public Article index() {
-        return articleService.find(1L);
-    }
-    
+    /**
+     * 博文详情页面
+     * @param mm
+     * @param id
+     * @return 
+     */
     @RequestMapping(value = "view/{id}", method = RequestMethod.GET)
     public String view(ModelMap mm, @PathVariable Long id) {
         Article article = articleService.find(id);

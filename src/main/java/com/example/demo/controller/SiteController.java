@@ -12,13 +12,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- *
+ * 站点控制器
  * @author allen
  */
 @Controller
 @RequestMapping("/site")
 public class SiteController {
     
+    /**
+     * 登录界面
+     * @param mm
+     * @param request
+     * @return 
+     */
     @RequestMapping(value = "login", method = {RequestMethod.GET, RequestMethod.POST})
     public String login(ModelMap mm, HttpServletRequest request) {
         String message = "hello, world!";

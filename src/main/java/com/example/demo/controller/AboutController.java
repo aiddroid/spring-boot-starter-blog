@@ -10,13 +10,18 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- *
+ * 关于控制器
  * @author allen
  */
 @Controller
 @RequestMapping("/about")
 public class AboutController {
     
+    /**
+     * 关于页面
+     * @param mm
+     * @return 
+     */
     @RequestMapping("index")
     public String index(ModelMap mm) {
         String message = "hello, world!";

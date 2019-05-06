@@ -11,9 +11,17 @@ package com.example.demo.pojo;
  */
 public class UploadFile {
     
+    //上传文件id,即标识符
     private String id;
+    
+    //上传文件url,相对路径
     private String url;
 
+    /**
+     * 构造函数
+     * @param id 上传文件id
+     * @param path 上传文件路径
+     */
     public UploadFile(String id, String path) {
         this.id = id;
         this.url = path;

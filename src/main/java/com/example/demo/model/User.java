@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Transient;
 
 /**
- *
+ * User 实体
  * @author allen
  */
 @Entity
@@ -21,22 +21,28 @@ public class User implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
+    //id, 自动生成的值
     @Id
     @GeneratedValue
     private Long id;
     
+    //用户名,非空唯一
     @Column(nullable = false, unique = true)
     private String username;
     
+    //密码,非空
     @Column(nullable = false)
     private String password;
     
+    //邮箱,非空唯一
     @Column(nullable = false, unique = true)
     private String email;
     
+    //昵称,非空
     @Column(nullable = true, unique = false)
     private String nickname;
     
+    //创建时间,非空
     @Column(nullable = false)
     private String createdAt;
     
@@ -44,6 +50,14 @@ public class User implements Serializable {
         super();
     }
     
+    /**
+     * 构造函数
+     * @param username 用户名
+     * @param password 密码
+     * @param nickname 昵称
+     * @param email 邮箱
+     * @param createdAt 创建时间 
+     */
     public User(String username, String password, String nickname,String email, String createdAt) {
         super();
         

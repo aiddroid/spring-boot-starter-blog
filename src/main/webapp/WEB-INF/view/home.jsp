@@ -28,7 +28,7 @@
 </head>
 
 <body>
-  
+  <!--引入公共导航头-->
   <jsp:include flush="true" page="./_partial/nav.jsp" />
 
   <!-- Page Header -->
@@ -38,7 +38,8 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
-              
+            
+            <!--判断是否需要显示alert-->
             <c:if test="${alert != null}">
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 ${alert}
@@ -60,6 +61,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
+        <!--根据博文列表显示博文-->
         <c:choose>
           <c:when test="${articles.size() > 0}">
             <c:forEach var="article" items="${articles}">
@@ -75,9 +77,11 @@
                 <p class="post-meta">Posted by
                   <a href="/?author=admin">admin</a>
                   <i>
+                      <!--日期格式化-->
                       <fmt:formatDate value="${article.createdAt}" pattern="yyyy-MM-dd HH:mm"/>
                   </i>
 
+                  <!--判断是否需要显示管理选项-->
                   <c:if test="${sessionScope.username != null}">
                       <a href="/admin/delete-article?id=${article.id}" class="delete-link text-danger">Delete</a>
                       <a href="/admin/update-article?id=${article.id}" class="edit-link text-danger">Edit</a>
@@ -108,6 +112,7 @@
 
   <hr>
 
+  <!--引入公共页脚-->
   <!-- Footer -->
   <jsp:include flush="true" page="./_partial/footer.jsp" />
 

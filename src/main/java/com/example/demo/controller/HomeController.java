@@ -19,30 +19,45 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- *
+ * 首页控制器
  * @author allen
  */
 @Controller
 public class HomeController {
     
+    /**
+     * 自动接入
+     */
     @Autowired
     private ArticleService articleService;
     
+    /**
+     * 网站首页
+     * @param mm
+     * @param page 页数
+     * @param count 每页博文数量
+     * @param request
+     * @param authentication
+     * @return 
+     */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap mm, 
             @RequestParam(value = "page", required = false, defaultValue = "1") int page, 
             @RequestParam(value = "count", required = false, defaultValue = "10") int count, 
             HttpServletRequest request, 
             Authentication authentication) {
-        List<Article> articles = articleService.get(page, count);
         
+        //获取对应分页的博文列表
+        List<Article> articles = articleService.get(page, count);
         mm.addAttribute("articles", articles);
         
-        int totalCount = articleService.totalCount();
+        //计算页数
+        int totalCount = articleService.getTotalCount();
         int maxPage = (int)Math.ceil((double)totalCount / count);
         mm.addAttribute("page", page);
         mm.addAttribute("maxPage", maxPage);
         
+        //判断是否登录
         if (authentication != null && authentication.isAuthenticated()) {
             request.getSession().setAttribute("username", "admin");
             System.out.println(request.getSession().getAttribute("username"));

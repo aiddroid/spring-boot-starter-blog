@@ -68,6 +68,7 @@
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>Content</label>
+              <!--显示博文正文,不进行转义-->
               <textarea class="form-control" placeholder="Content" id="content" name="content" required data-validation-required-message="Please enter content." rows="20"><c:out value="${article.content}" escapeXml="false"/></textarea>
               <p class="help-block text-danger"></p>
             </div>
@@ -97,12 +98,13 @@
   <!--redactor editor-->
   <script src="js/redactor3.js"></script>
   <script>
+      //配置富文本编辑器
       $R('#content', 
               {
                   minHeight: '200px',
                   imageLink: true,
-                  imageUpload: '/admin/upload',
-                  imageUploadParam: 'uploadfile',
+                  imageUpload: '/admin/upload',//上传路径
+                  imageUploadParam: 'uploadfile',//上传字段名
                   imageResizable: true
               }
        );

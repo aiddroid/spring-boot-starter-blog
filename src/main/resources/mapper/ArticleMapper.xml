@@ -13,22 +13,27 @@
         <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
     </resultMap>
     
+    <!--查询的结果通过上面定义的ArticleList解析-->
     <select id="getById" parameterType="Long" resultMap="ArticleList">
         SELECT * FROM article WHERE id = #{id}
     </select>
     
+    <!--查询的结果通过上面定义的ArticleList解析-->
     <select id="getList" parameterType="HashMap" resultMap="ArticleList">
         SELECT * FROM article ORDER BY id DESC LIMIT #{offset}, #{count}
     </select>
     
+    <!--查询的结果通过上面定义的ArticleList解析-->
     <select id="getAll" resultMap="ArticleList">
         SELECT * FROM article ORDER BY id DESC
     </select>
     
+    <!--参数通过HashMap传递-->
     <insert id="add" parameterType="HashMap">
         INSERT INTO article VALUES(NULL, #{title}, #{slug}, #{content}, #{uid}, #{createdAt}, #{updatedAt})
     </insert>
     
+    <!--参数通过HashMap传递-->
     <update id="update" parameterType="HashMap">
         UPDATE article SET title = #{title}, slug = #{slug}, content = #{content}, updated_at = #{updatedAt} WHERE id = #{id}
     </update>
@@ -37,7 +42,8 @@
         DELETE FROM article WHERE id = #{id}
     </delete>
     
-    <select id="totalCount" resultType="Integer">
+    <!--指定返回值类型为Long-->
+    <select id="getTotalCount" resultType="Integer">
         SELECT COUNT(id) FROM article
     </select>
 </mapper>
