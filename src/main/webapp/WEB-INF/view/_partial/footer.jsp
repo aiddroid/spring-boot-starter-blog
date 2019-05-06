@@ -33,7 +33,7 @@
           </ul>
           <c:set var="date" value="<%=new java.util.Date()%>" />
           <fmt:formatDate value="${date}" pattern="yyyy" var="currentYear" />
-          <p class="copyright text-muted">Copyright &copy; Demo Blog <c:out value="${currentYear}" /></p>
+          <p class="copyright text-muted">Copyright &copy; Starter Blog <c:out value="${currentYear}" /></p>
         </div>
       </div>
     </div>

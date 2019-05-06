@@ -15,7 +15,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Demo Blog - Start Bootstrap Theme</title>
+  <title>Starter Blog - Start Bootstrap Theme</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -52,7 +52,7 @@
             </div>
             </c:if>
               
-            <h1>A demo blog</h1>
+            <h1>A Starter Blog</h1>
             <span class="subheading">A Blog Theme by Bootstrap and powered by Springboot 2.x</span>
           </div>
         </div>
