@@ -117,15 +117,9 @@ public class AdminController {
             HttpServletRequest request) {
         
         Article article = articleService.find(id);
-        //如果是GET请求，则显示更新表单；否则直接更新博文
-        if (request.getMethod().equals("GET")) {
-            mm.addAttribute("article", article);
-            return "/admin/update-article";
-        } else {
-            articleService.modify(article.getId(), title, slug, content);
-            
-            return "redirect:/article/view/" + article.getId();
-        }
+        //更新博文
+        articleService.modify(article.getId(), title, slug, content);   
+        return "redirect:/article/view/" + article.getId();
     }
     
     /**
@@ -139,11 +133,9 @@ public class AdminController {
             RedirectAttributes redirAttrs) {
         
         //删除成功后，添加flash消息
-        if (articleService.delete(id) > 0) {
-            redirAttrs.addFlashAttribute("alert", "Article deleted!");
-        } else {
-            redirAttrs.addFlashAttribute("alert", "Error occured, try agian later!");
-        }
+        int result = articleService.delete(id);
+        String alert = result > 0 ? "Article deleted!" : "Error occured, try agian later!";
+        redirAttrs.addFlashAttribute("alert", alert);
         return "redirect:/";
     }
     
@@ -178,10 +170,11 @@ public class AdminController {
     @RequestMapping("upload")
     @ResponseBody
     public HashMap upload(@RequestParam("uploadfile[]") MultipartFile mfile) {
-        HashMap uploadMap = new HashMap();
+        HashMap uploadedMap = new HashMap();
         
+        //判断上传文件是否为空
         if (mfile.isEmpty()) {
-            return uploadMap;
+            return uploadedMap;
         }
         
         try {
@@ -194,14 +187,15 @@ public class AdminController {
             mfile.transferTo(destFile);
             
             //返回上传结果，json格式
-            UploadFile uploadFile = new UploadFile(mfile.getOriginalFilename(), uploadAccessPath.replace("*", "") + newName);
-            uploadMap.put(uuid, uploadFile);
+            UploadFile uploadFile = new UploadFile(mfile.getOriginalFilename(), 
+                    uploadAccessPath.replace("*", "") + newName);
+            uploadedMap.put(uuid, uploadFile);
             
-            return uploadMap;
+            return uploadedMap;
         } catch (IOException e) {
             System.err.println(e);
         }
         
-        return uploadMap;
+        return uploadedMap;
     }
 }
