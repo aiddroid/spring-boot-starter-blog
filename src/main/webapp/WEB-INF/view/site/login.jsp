@@ -55,7 +55,7 @@
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>Username</label>
-              <input type="text" class="form-control" placeholder="Username" id="username" name="username" required data-validation-required-message="Please enter your username.">
+              <input type="text" class="form-control" placeholder="Username" id="username" name="username" required data-validation-required-message="Please enter your username." autocomplete="off">
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -64,6 +64,14 @@
               <label>Password</label>
               <input type="password" class="form-control" placeholder="Password" id="password" name="password" required data-validation-required-message="Please enter your password.">
               <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Captcha</label>
+              <input type="text" class="form-control col-sm-4" placeholder="Captcha" id="captcha" name="captcha" required data-validation-required-message="Please enter captcha." autocomplete="off">
+              <img src="/site/captcha" style="cursor: pointer;width: 80px;" onclick="this.src=('/site/captcha?' + (new Date().toISOString()))">
+              <p class="help-block text-danger">${error}</p>
             </div>
           </div>
           <!--anti csrf token-->

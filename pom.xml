@@ -73,6 +73,13 @@
                     <artifactId>mysql-connector-java</artifactId>
                 </dependency>
                 
+                <!--图形验证码-->
+                <dependency>
+                    <groupId>com.github.penggle</groupId>
+                    <artifactId>kaptcha</artifactId>
+                    <version>2.3.2</version>
+                </dependency>
+                
                 <!--开发工具，实时调试-->
                 <dependency>
                     <groupId>org.springframework.boot</groupId>
