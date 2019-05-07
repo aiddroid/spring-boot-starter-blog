@@ -11,17 +11,14 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 /**
- *
+ * 验证码过滤器(拦截器)
  * @author allen
  */
 @Component
@@ -50,15 +47,23 @@ public class CaptchaFilter extends OncePerRequestFilter implements Filter {
         filterChain.doFilter(request, response);
     }
 
+    /**
+     * 验证码验证
+     * @param request
+     * @throws InvalidCaptchaException 
+     */
     private void validate(ServletWebRequest request) throws InvalidCaptchaException {
         String inputCaptcha = request.getParameter("captcha");
         if (inputCaptcha == null || inputCaptcha.length() == 0) {
             throw new InvalidCaptchaException("验证码不能为空");
         }
         
+        //从session获取验证码
+        //TODO key应该从kaptcha配置文件动态获取
         String captcha = (String)request.getRequest().getSession().getAttribute("captcha");
         
         System.out.println("input :" + inputCaptcha + ", real " + captcha);
+        //比较用户输入的验证码与session中的是否一致
         if (!captcha.equalsIgnoreCase(inputCaptcha)) {
             throw new InvalidCaptchaException("验证码不正确" );
         }

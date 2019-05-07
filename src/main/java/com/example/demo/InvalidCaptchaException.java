@@ -8,7 +8,7 @@ package com.example.demo;
 import org.springframework.security.core.AuthenticationException;
 
 /**
- *
+ * 无效验证码异常类
  * @author allen
  */
 class InvalidCaptchaException extends AuthenticationException

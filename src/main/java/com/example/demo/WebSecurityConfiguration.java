@@ -35,7 +35,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 //        http.csrf().disable();
         
         http
-            .addFilterBefore(captchaFilter, UsernamePasswordAuthenticationFilter.class)//在登录的账号密码验证前增加captcha验证
+            .addFilterBefore(captchaFilter, UsernamePasswordAuthenticationFilter.class)//在登录的账号密码验证行为前增加captcha验证
             .authorizeRequests()
             .antMatchers("/", "/static/**", "/about/**", "/article/**", "/site/login", "/site/captcha") // 不需要登录就可以访问
             .permitAll()
@@ -70,7 +70,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 }
 
 /**
- * 密码编码器
+ * 密码编码器(明文验证,实际应用中建议采用SHA1等进行编码)
  * @author allen
  */
 class PlainPasswordEncoder implements PasswordEncoder {
