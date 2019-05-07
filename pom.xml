@@ -122,6 +122,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+                                <configuration>
+                                    <!--指定主类-->
+                                    <mainClass>com.example.demo.BlogApplication</mainClass>
+                                </configuration>
 			</plugin>
 		</plugins>
 	</build>

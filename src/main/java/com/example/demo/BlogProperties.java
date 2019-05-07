@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Value;
  * @author allen
  */
 @Component
-public class DemoProperties {
+public class BlogProperties {
     @Value("${com.example.demo.title}")
     private String title;
     

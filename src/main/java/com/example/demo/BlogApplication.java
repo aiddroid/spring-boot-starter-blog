@@ -27,16 +27,16 @@ import org.springframework.context.annotation.ImportResource;
  */
 @SpringBootApplication
 @ImportResource(locations={"classpath:kaptcha.xml"})
-public class DemoApplication extends SpringBootServletInitializer{
+public class BlogApplication extends SpringBootServletInitializer{
 
     public static void main(String[] args) {
         //指定启动的App
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication.run(BlogApplication.class, args);
     }
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         //指定资源
-        return application.sources(DemoApplication.class);
+        return application.sources(BlogApplication.class);
     }
 }
