@@ -29,7 +29,8 @@ Please, consider helping project via [contributions](https://github.com/aiddroid
 1. Create MySQL database "spring-boot-starter-blog", and load SQL in file src/main/resources/spring-boot-starter-blog.sql.
 2. Run
     ```bash
-    java -jar target/starter-blog-0.0.1-SNAPSHOT.war --server.port=YOUR-PORT --spring.datasource.username=YOUR-USERNAME --spring.datasource.password=YOUR-PASSWORD
+    java -jar dist/starter-blog-0.0.1-SNAPSHOT.war --server.port=YOUR-PORT \
+         --spring.datasource.username=YOUR-USERNAME --spring.datasource.password=YOUR-PASSWORD
     ```
 3. Visit [http://localhost:YOUR-PORT](http://localhost:YOUR-PORT)
 
