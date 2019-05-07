@@ -37,7 +37,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
         http
             .addFilterBefore(captchaFilter, UsernamePasswordAuthenticationFilter.class)//在登录的账号密码验证行为前增加captcha验证
             .authorizeRequests()
-            .antMatchers("/", "/static/**", "/about/**", "/article/**", "/site/login", "/site/captcha") // 不需要登录就可以访问
+            .antMatchers("/", "/static/**", "/about/**", "/article/**", "/site/login", "/site/captcha", "/uploadfile/**") // 不需要登录就可以访问
             .permitAll()
             //.antMatchers("/admin/**").hasAnyRole("ADMIN") // 需要具有ROLE_ADMIN角色才能访问
             .anyRequest().authenticated()

@@ -183,7 +183,7 @@ public class AdminController {
             String newName = uuid + ".jpg";
             File destFile = new File(uploadFolder + newName);
             
-            //移动上传临时文件到上传目录
+            //移动上传的临时文件到上传目录
             mfile.transferTo(destFile);
             
             //返回上传结果，json格式

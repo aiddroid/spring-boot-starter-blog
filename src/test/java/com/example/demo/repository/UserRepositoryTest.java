@@ -18,7 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- *
+ * 本测试类由目标类-右键-工具-生成测试 功能生成(netbeans)
  * @author allen
  */
 @RunWith(SpringRunner.class)

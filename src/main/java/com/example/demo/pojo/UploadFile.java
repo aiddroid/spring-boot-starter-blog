@@ -6,7 +6,7 @@
 package com.example.demo.pojo;
 
 /**
- *
+ * 上传文件类
  * @author allen
  */
 public class UploadFile {
