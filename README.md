@@ -4,7 +4,7 @@
 
 [![Spring Boot](https://img.shields.io/badge/spring%20boot-%3E%3D2.0-green.svg)](https://spring.io/projects/spring-boot/)
 [![Java](https://img.shields.io/badge/java-%3E%3D1.8-green.svg)](https://java.com)
-[![Netbeans](https://img.shields.io/badge/netbeans-%3E%3D8-green.svg)](https://netbeans.org)
+[![Netbeans](https://img.shields.io/badge/netbeans-%3E%3D8.0-green.svg)](https://netbeans.org)
 <!-- /BADGES -->
 
 This is Spring Boot Starter Blog.
@@ -63,6 +63,11 @@ Please, consider helping project via [contributions](https://github.com/aiddroid
 
 ## Screenshots
 !["Homepage Screenshot"](https://github.com/aiddroid/spring-boot-starter-blog/raw/master/screenshots/screenshot-1.png "Homepage Screenshot")
+---
+!["Rich text editor"](https://github.com/aiddroid/spring-boot-starter-blog/raw/master/screenshots/screenshot-2.png "Rich text editor")
+---
+!["Login page"](https://github.com/aiddroid/spring-boot-starter-blog/raw/master/screenshots/screenshot-3.png "Login page")
+
 
 
 ## How to contribute?
