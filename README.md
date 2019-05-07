@@ -27,9 +27,10 @@ Please, consider helping project via [contributions](https://github.com/aiddroid
 ## Quickstart
 ### Run war in console
 1. Create MySQL database "spring-boot-starter-blog", and load SQL in file src/main/resources/spring-boot-starter-blog.sql.
-2. Run
+2. Download release from [releases](https://github.com/aiddroid/spring-boot-starter-blog/releases)
+3. Run
     ```bash
-    java -jar dist/starter-blog-0.0.1-SNAPSHOT.war --server.port=YOUR-PORT \
+    java -jar starter-blog-0.0.1-SNAPSHOT.war --server.port=YOUR-PORT \
          --spring.datasource.username=YOUR-USERNAME --spring.datasource.password=YOUR-PASSWORD
     ```
 3. Visit [http://localhost:YOUR-PORT](http://localhost:YOUR-PORT)
